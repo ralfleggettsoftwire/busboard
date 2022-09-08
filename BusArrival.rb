@@ -1,3 +1,5 @@
+##
+# Holds information for a single arriving bus
 class BusArrival
   attr_reader :destination, :line_number, :seconds_to_arrival
 
@@ -12,6 +14,6 @@ class BusArrival
   end
 
   def pretty_print
-    puts "Line ID #{@line_number} to #{@destination} in #{get_minutes_to_arrival} minutes."
+    puts "  Line ID #{@line_number} to #{@destination} in #{get_minutes_to_arrival} minutes."
   end
 end
