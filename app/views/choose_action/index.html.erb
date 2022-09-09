@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <title>BusBoard</title>
+  </head>
+  <body>
+    <h1>Welcome to the Bus Board</h1>
+    <div>
+      <h3>Choose an action: </h3>
+      <div>
+        <%= form_with url: "/postcode_arrivals", method: :get do |form| %>
+          <%= form.label :postcode, 'Enter a postcode:' %>
+          <%= form.text_field :postcode %>
+          <%= form.submit "Search" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: "/stop_id_arrivals", method: :get do |form| %>
+          <%= form.label :stop_id, 'Enter a bus stop ID:' %>
+          <%= form.text_field :stop_id %>
+          <%= form.submit "Search" %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
+
+

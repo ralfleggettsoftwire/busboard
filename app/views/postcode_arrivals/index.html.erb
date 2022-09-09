@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <title>BusBoard</title>
+  </head>
+  <body>
+    <h1>Bus Arrivals by Postcode</h1>
+    <div>
+      <%= "Displaying nearby stops for #{@pretty_postcode}" %>
+
+      <% @errors.each do |err| %>
+        <p class="error"><%= err %></p>
+      <% end %>
+
+      <% if @data.has_key?(:stop_data) %>
+        <% @data[:stop_data].each do |stop| %>
+          <h4><%= stop[:name] %></h4>
+          <% if stop[:arrivals].length > 0 %>
+            <table>
+              <% stop[:arrivals].each do |arr| %>
+                <tr>
+                  <td><%= arr[:line_number] %></td>
+                  <td><%= arr[:destination] %></td>
+                  <td><%= arr[:minutes_to_arrival] %> minutes</td>
+                </tr>
+              <% end %>
+            </table>
+          <% else %>
+            <p>No arrivals for this stop</p>
+          <% end %>
+        <% end %>
+      <% else %>
+        <h4><%= "No stops found for this postcode within #{@radius}m" %></h4>
+      <% end %>
+    </div>
+  </body>
+</html>
