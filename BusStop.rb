@@ -10,7 +10,7 @@ class BusStop
   end
 
   ##
-  # Returns first n expected arrivals at the stop
+  # Prints first n expected arrivals at the stop. Returns true if buses were found
   def get_bus_arrivals(number_to_display = 5)
     # Call the TFL API
     request = "https://api.tfl.gov.uk/StopPoint/#{@stop_id}/Arrivals"
@@ -30,5 +30,8 @@ class BusStop
     else
       puts "  No arrivals for this stop"
     end
+
+    # Indicate if buses were found
+    return buses.length > 0
   end
 end
