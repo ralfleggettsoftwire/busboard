@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_09_101202) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_092619) do
+  create_table "base_apis", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bus_arrivals", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -21,7 +26,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_09_101202) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "postcode_arrivals", force: :cascade do |t|
+  create_table "postcode_apis", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "postcode_stops", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tfl_apis", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

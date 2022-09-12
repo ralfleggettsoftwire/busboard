@@ -1,3 +1,5 @@
+require('date')
+
 class PostcodeArrivalsController < ApplicationController
   def initialize
     @postcode = ''
@@ -6,11 +8,14 @@ class PostcodeArrivalsController < ApplicationController
     @data = {}
     @radius = 200
     @number_to_retrieve = 2
+    @retrieval_time = nil
   end
 
   def index
+    @retrieval_time = Time.now
+
     @postcode = params[:postcode].gsub(/\s*/, '')
-    unless PostcodeStop.valid_postcode?(@postcode)
+    unless PostcodeApi.valid_postcode?(@postcode)
       @errors << "#{@postcode} is not a valid postcode."
       @pretty_postcode = @postcode
       return

@@ -3,9 +3,12 @@ class StopIdArrivalsController < ApplicationController
     @stop_id = ''
     @errors = []
     @data = {}
+    @retrieval_time = nil
   end
 
   def index
+    @retrieval_time = Time.now
+
     @stop_id = params[:stop_id].gsub(/\s*/, '').upcase
 
     # Get BusStop object; may return NotFoundError if supplied stop_id is not found
@@ -17,7 +20,7 @@ class StopIdArrivalsController < ApplicationController
       return
     end
 
-    @data[:name] = bus_stop.name
+    @data[:name] = bus_stop.info[:name]
     @data[:arrivals] = bus_stop.get_bus_arrivals
   end
 end

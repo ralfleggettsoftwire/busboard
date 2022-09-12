@@ -2,30 +2,62 @@
 <html lang="en-gb">
   <head>
     <title>BusBoard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag "application" %>
+    <script type="text/javascript">
+        setTimeout("location.reload();",30000);
+    </script>
   </head>
   <body>
-    <h1>Bus Arrivals by Stop ID</h1>
-    <div>
-      <%= "Displaying arrivals for #{@stop_id}" %>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to image_tag('BB.png', alt:'BusBoard', style:'height:50px'), '/', class:'navbar-item' %>
+      </div>
+      <div class="navbar-start">
+        <h1 class="navbar-item title is-5"><%= link_to 'BusBoard', '/' %></h1>
+      </div>
+    </nav>
 
-      <% @errors.each do |err| %>
-        <p class="error"><%= err %></p>
+    <section class="section level">
+      <h2 class="level-item title is-1">Bus Arrivals by Stop ID</h2>
+    </section>
+
+    <section class="section">
+      <div class="block">
+        <h3 class="title is-3"><%= "Displaying arrivals for #{@stop_id}" %></h3>
+      </div>
+      <div class="block">
+        <h5 class="subtitle is-5">Retrieved at <%= @retrieval_time.strftime(format='%H:%M:%S') %></h5>
+      </div>
+
+      <% if @errors.length > 0 %>
+        <div class="block notification is-warning">
+          <% @errors.each do |err| %>
+            <p class="error is-warning"><%= err %></p>
+          <% end %>
+        </div>
       <% end %>
 
       <% if @data.has_key?(:arrivals) %>
-        <h4><%= @data[:name] %></h4>
-        <table>
-          <% @data[:arrivals].each do |arr| %>
-            <tr>
-              <td><%= arr[:line_number] %></td>
-              <td><%= arr[:destination] %></td>
-              <td><%= arr[:minutes_to_arrival] %> minutes</td>
-            </tr>
-          <% end %>
-        </table>
-      <% else %>
-        <p>No arrivals for this stop</p>
-      <% end %>
-    </div>
+        <div class="block">
+          <h4 class="title is-4"><%= @data[:name] %></h4>
+          <table class="table is-fullwidth is-striped">
+            <% @data[:arrivals].each do |arr| %>
+              <tr>
+                <td style="width: 10%"><%= arr[:line_number] %></td>
+                <td style="width: 70%"><%= arr[:destination] %></td>
+                <td style="width: 20%"><%= arr[:minutes_to_arrival] %> minutes</td>
+              </tr>
+            <% end %>
+          </table>
+        <% else %>
+          <p>No arrivals for this stop</p>
+        <% end %>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <h4 class="title is-4"><%= link_to 'Search again...', '/' %></h4>
+    </footer>
   </body>
 </html>

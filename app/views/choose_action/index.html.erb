@@ -2,26 +2,49 @@
 <html lang="en-gb">
   <head>
     <title>BusBoard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag "application" %>
   </head>
   <body>
-    <h1>Welcome to the Bus Board</h1>
-    <div>
-      <h3>Choose an action: </h3>
-      <div>
-        <%= form_with url: "/postcode_arrivals", method: :get do |form| %>
-          <%= form.label :postcode, 'Enter a postcode:' %>
-          <%= form.text_field :postcode %>
-          <%= form.submit "Search" %>
-        <% end %>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to image_tag('BB.png', alt:'BusBoard', style:'height:50px'), '/', class:'navbar-item' %>
       </div>
-      <div>
-        <%= form_with url: "/stop_id_arrivals", method: :get do |form| %>
-          <%= form.label :stop_id, 'Enter a bus stop ID:' %>
-          <%= form.text_field :stop_id %>
-          <%= form.submit "Search" %>
-        <% end %>
+      <div class="navbar-start">
+        <h1 class="navbar-item title is-5"><%= link_to 'BusBoard', '/', class: 'is-link' %></h1>
       </div>
-    </div>
+    </nav>
+    <section class="section level">
+      <h2 class="level-item title is-1">Welcome to the Bus Board</h2>
+    </section>
+    <section class="section">
+      <div class="columns">
+        <div class="column">
+          <h4 class="title is-4">Search for buses by postcode</h4>
+          <%= form_with url: '/postcode_arrivals', method: :get do |form| %>
+            <div class="field">
+              <%= form.label :postcode, 'Enter a postcode:', class: 'label' %>
+              <%= form.text_field :postcode, class: 'input' %>
+            </div>
+            <div class="field">
+              <%= form.submit 'Search', class: 'button' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="column">
+          <h4 class="title is-4">Search for buses by stop ID</h4>
+          <%= form_with url: '/stop_id_arrivals', method: :get do |form| %>
+            <div class="field">
+              <%= form.label :stop_id, 'Enter a bus stop ID:', class: 'label' %>
+              <%= form.text_field :stop_id, class: 'input' %>
+            </div>
+            <div class="field">
+              <%= form.submit 'Search', class: 'button' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
 

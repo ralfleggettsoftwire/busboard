@@ -69,3 +69,4 @@ group :test do
 end
 
 gem "faraday"
+gem "bulma-rails"
