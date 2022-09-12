@@ -1,5 +1,7 @@
 require('date')
 
+require_relative '../models/bus_board_error'
+
 class PostcodeArrivalsController < ApplicationController
   def initialize
     @postcode = ''
@@ -15,17 +17,16 @@ class PostcodeArrivalsController < ApplicationController
     @retrieval_time = Time.now
 
     @postcode = params[:postcode].gsub(/\s*/, '')
-    unless PostcodeApi.valid_postcode?(@postcode)
+
+    begin
+      postcode_stop = PostcodeStop.new(@postcode)
+      stop_data = postcode_stop.get_arrivals(@radius, @number_to_retrieve)
+      @data[:stop_data] = stop_data
+      prettify_postcode
+    rescue InvalidPostcodeError => e
       @errors << "#{@postcode} is not a valid postcode."
       @pretty_postcode = @postcode
-      return
     end
-
-    prettify_postcode
-
-    postcode_stop = PostcodeStop.new(@postcode)
-    stop_data = postcode_stop.get_arrivals(@radius, @number_to_retrieve)
-    @data[:stop_data] = stop_data
   end
 
   ##

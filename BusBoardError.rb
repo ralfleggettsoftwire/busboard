@@ -9,3 +9,7 @@ end
 class NotFoundError < APIError
 
 end
+
+class InvalidPostcodeError < BusBoardError
+
+end

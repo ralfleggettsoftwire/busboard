@@ -1,11 +1,9 @@
 require 'json'
 
-require_relative './http_tools'
-
 ##
 # Manages interactions with the TFL API. Abstracts the API so that if there are any changes to it,
 # the only adjustments that need to be made are in this file
-class TflApi < ApplicationRecord
+class TflApi < BaseApi
   ##
   # Gets bus stops within radius metres of a latitude, longitude coordinate
   def get_nearest_busstops(lat, lon, radius)

@@ -1,3 +1,4 @@
+require_relative './bus_board_error'
 require_relative './bus_stop'
 require_relative './postcode_api'
 require_relative './tfl_api'
@@ -9,6 +10,11 @@ class PostcodeStop < ApplicationRecord
     @postcode = postcode
     @postcode_api = PostcodeApi.new
     @tfl_api = TflApi.new
+
+    # Check postcode is valid
+    unless @postcode_api.valid_postcode?(@postcode)
+      raise InvalidPostcodeError.new, 'Postcode is not valid'
+    end
   end
 
   ##
