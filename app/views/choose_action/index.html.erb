@@ -14,11 +14,14 @@
         <h1 class="navbar-item title is-5"><%= link_to 'BusBoard', '/', class: 'is-link' %></h1>
       </div>
     </nav>
+
     <section class="section level">
       <h2 class="level-item title is-1">Welcome to the Bus Board</h2>
     </section>
+
     <section class="section">
       <div class="columns">
+
         <div class="column">
           <h4 class="title is-4">Search for buses by postcode</h4>
           <%= form_with url: '/postcode_arrivals', method: :get do |form| %>
@@ -31,6 +34,7 @@
             </div>
           <% end %>
         </div>
+
         <div class="column">
           <h4 class="title is-4">Search for buses by stop ID</h4>
           <%= form_with url: '/stop_id_arrivals', method: :get do |form| %>

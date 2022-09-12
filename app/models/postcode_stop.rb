@@ -1,9 +1,9 @@
-require 'json'
-
 require_relative './bus_stop'
 require_relative './postcode_api'
 require_relative './tfl_api'
 
+##
+# Manages information about bus arrivals at bus stops near the object's @postcode
 class PostcodeStop < ApplicationRecord
   def initialize(postcode)
     @postcode = postcode

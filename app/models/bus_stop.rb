@@ -1,5 +1,7 @@
 require_relative './tfl_api'
 
+##
+# Manages information about bus arrivals for a particular bus stop ID (the object's @stop_id)
 class BusStop < ApplicationRecord
   attr_reader :stop_id, :info
 

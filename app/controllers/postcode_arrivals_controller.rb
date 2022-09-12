@@ -28,6 +28,8 @@ class PostcodeArrivalsController < ApplicationController
     @data[:stop_data] = stop_data
   end
 
+  ##
+  # Nicely formats @postcode to display on the webpage
   private def prettify_postcode
     @pretty_postcode = @postcode.slice(..-4).upcase
     @pretty_postcode += " "
